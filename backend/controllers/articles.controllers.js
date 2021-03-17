@@ -10,11 +10,13 @@ router.creer_article = (req, res) => {
       message: "Content can not be empty!"
     });
   }
-  console.log(req.body.contenu)
   
+  console.log(req.body)
   const article = new Article({
     contenu: req.body.contenu,
-    id_utilisateur : req.params.utilisateurId
+    title: req.body.title,
+    id_utilisateur : req.params.utilisateurId,
+    id_article : req.body.id_article
    
    });
   
@@ -30,6 +32,7 @@ router.creer_article = (req, res) => {
 
 router.afficher_articles = (req, res) => {
   Article.recuperer_articles((err, data) => {
+    
     if (err)
       res.status(500).send({
         message:
@@ -38,6 +41,20 @@ router.afficher_articles = (req, res) => {
     else res.send(data);
   });
 };
+
+
+router.afficher_reponses = (req, res) => {
+
+  Article.recuperer_reponses(req.params.articleId,(err, data) => {
+    if (err)
+      res.status(200).send({
+        message:
+          err.message || "Nous avons retrouvé aucun message écrit par ce profil."
+      });
+    else res.send(data);
+  });
+};
+
 
 
 router.supprimer_article = (req, res) => {

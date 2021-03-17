@@ -12,8 +12,8 @@ export class Login extends React.Component {
       
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   
   handleChange(event) {
@@ -39,11 +39,11 @@ export class Login extends React.Component {
         
         if(user.status === 200){
 
-            console.log("connexion réussi")
             user.json().then(res => {
-              console.log(res)
+              
               localStorage.setItem("token", res.token);
               localStorage.setItem("user_id", res.userId);
+              window.location.reload();
               
             })
                 
@@ -90,4 +90,6 @@ export class Login extends React.Component {
     );
   }
 }
+
+export default (Login) ;
 

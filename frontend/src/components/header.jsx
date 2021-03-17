@@ -1,9 +1,10 @@
 import React from "react";
 
-
+import withAuth from "./authentification/withAuth.jsx"; 
 export class Header extends React.Component {
   handleClick = () => {
     localStorage.removeItem("token");
+    window.location.reload();
   }
     render() {
       return(
@@ -13,9 +14,9 @@ export class Header extends React.Component {
         
           <nav className="Nav">
             <a href="/">Home</a>
-            <a href="/">Articles</a>
-            <a href="/">About</a>
-            <button onClick={this.handleClick} >Déconnexion</button>
+            <a href="/profil">Profil</a>
+            <a href="/">Administrateur</a>
+            <button id="button_header"onClick={this.handleClick} >Déconnexion</button>
           </nav>
       
         
@@ -25,3 +26,4 @@ export class Header extends React.Component {
       
     }
 }
+export default withAuth(Header) ;

@@ -1,20 +1,32 @@
 import React from "react";
-import "./App.scss";
 
-import "./components/login/RightSide";
 
-import { Login, Register ,Header} from "./pages/index";
+
+//scss
+import "./scss/register-login.scss";
+import "./scss/header.scss";
+import "./scss/home.scss";
+
+//components
+import { Header} from "./components/header.jsx";
+
+
+//pages
+import {Register} from "./pages/register.jsx";
+import {Login} from "./pages/login.jsx";
+import {Accueil} from "./pages/home.jsx";
+import {Profil} from "./pages/profil.jsx";
+
 import { BrowserRouter, Switch, Route,Redirect} from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     
-    
     this.state = {
       isLogginActive: true
-      
     };
+    
   }
 
   componentDidMount() {
@@ -45,14 +57,20 @@ class App extends React.Component {
     const currentActive = isLogginActive ? "login" : "register";
    
     const isAuth = !!localStorage.getItem("token");
+    console.log(isAuth)
     return (
     
       <BrowserRouter>
+      {isAuth &&
         <Header />
+      } 
         <Switch>
-        
+          
           <Route exact path="/">  
           
+           {isAuth &&
+            <Redirect to="/accueil" />
+            } 
             <div className="App">
               <div className="login">
                 <div className="container" ref={ref => (this.container = ref)}>
@@ -76,9 +94,27 @@ class App extends React.Component {
        
         
         <Route exact path="/accueil">  
+        
+        {!isAuth &&
+        
+            <Redirect to="/" />
+           
+          } 
+          <Accueil />
       
             
         </Route>
+
+        <Route exact path="/profil">  
+        
+          {!isAuth &&
+          
+              <Redirect to="/" />
+            
+          } 
+          <Profil />
+        </Route>
+
         </Switch>
         
       </BrowserRouter>

@@ -7,7 +7,7 @@ const withAuth = (Component) => {
     if (isAuth) {
       return <Component />;
     } else {
-      return <Redirect to="/Connexion" />;
+      return <Redirect to="/" />;
     }
   };
 
