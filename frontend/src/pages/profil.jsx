@@ -6,6 +6,11 @@ export class Profil extends React.Component{
   constructor(props) {
    
     super(props);
+   
+    this.state = {
+      id_utilisateur: this.props.location.state
+      
+    };
     
   }
 
@@ -15,11 +20,11 @@ export class Profil extends React.Component{
     
     return (
      
-      <div>
+      <section>
           
-          <Affichage_profil />
+          <Affichage_profil  id_utilisateur= {this.state.id_utilisateur}/>
 
-      </div>
+      </section>
     );
   }
 }

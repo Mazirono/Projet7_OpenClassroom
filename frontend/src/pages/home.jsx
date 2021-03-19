@@ -11,11 +11,11 @@ export class Accueil extends React.Component {
   
   render() {
     return (
-     <div>
+     <section id="section_accueil">
         <Formulaire_article/>
         <Affichage_accueil />
         
-     </div>
+     </section>
     );
   }
 }

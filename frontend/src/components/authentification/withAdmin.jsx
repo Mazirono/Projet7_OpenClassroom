@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 
 const withAdmin = (Component) => {
   const AdminRoute = () => {
-    const isAdmin = !!localStorage.getItem("Administrateur");
+    const isAdmin = !!localStorage.getItem("administrateur");
     if (isAdmin) {
       return <Component />;
     } else {

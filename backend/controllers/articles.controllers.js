@@ -11,7 +11,6 @@ router.creer_article = (req, res) => {
     });
   }
   
-  console.log(req.body)
   const article = new Article({
     contenu: req.body.contenu,
     title: req.body.title,
@@ -44,32 +43,13 @@ router.afficher_articles = (req, res) => {
 
 
 router.afficher_reponses = (req, res) => {
-
   Article.recuperer_reponses(req.params.articleId,(err, data) => {
     if (err)
       res.status(200).send({
         message:
-          err.message || "Nous avons retrouvé aucun message écrit par ce profil."
+          err.message || false
       });
     else res.send(data);
-  });
-};
-
-
-
-router.supprimer_article = (req, res) => {
-  Article.suppression_article(req.body.id, (err, data) => {
-    if (err) {
-      if (err.kind === "L'article n'existe pas") {
-        res.status(404).send({
-          message: `L'article avec l'id : ${req.body.id} n'a pas été trouvé`
-        });
-      } else {
-        res.status(500).send({
-          message: "Impossible de supprimer l'article avec l'id : " + req.body.id
-        });
-      }
-    } else res.send({ message: `L'article a été supprimé` });
   });
 };
 
@@ -84,6 +64,36 @@ router.messages_profil = (req, res) => {
     else res.send(data);
   });
 };
+
+router.afficher_administrateur = (req, res) => {
+  Article.recuperer_administrateur((err, data) => {
+    
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Erreur les articles n'ont pas été retouvés"
+      });
+    else res.send(data);
+  });
+};
+
+router.supprimer_article = (req, res) => {
+  
+  Article.suppression_article(req.params.articleId, (err, data) => {
+    if (err) {
+      if (err.kind === "L'article n'existe pas") {
+        res.status(404).send({
+          message: `L'article avec l'id : ${req.body.id} n'a pas été trouvé`
+        });
+      } else {
+        res.status(500).send({
+          message: "Impossible de supprimer l'article avec l'id : " + req.body.id
+        });
+      }
+    } else res.send({ message: `L'article a été supprimé` });
+  });
+};
+
 
 
 

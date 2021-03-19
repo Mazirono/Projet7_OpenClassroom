@@ -1,5 +1,5 @@
 import React from "react";
-
+import {Link} from "react-router-dom";
 
 class Utilisateur extends React.Component {
  
@@ -19,6 +19,7 @@ class Utilisateur extends React.Component {
     }
   
     componentDidMount() {
+      
     fetch("http://localhost:3001/api/utilisateurs/informations_utilisateur/" + this.props.id_utilisateur) 
       .then(res => res.json())
       .then(
@@ -51,12 +52,18 @@ class Utilisateur extends React.Component {
           return <div>Chargement…</div>;
         } else {
           return (
-            <div>
+            <div className="element_article">
                {items.map(item => (
+                 
                 <li key={item.id}>
                   
-                  <a href="/profil">{item.prenom} {item.nom} </a>
-                 
+                  
+                  <Link to={{
+                  pathname: '/profil',
+                  state: {
+                    id_utilisateur: item.id
+                  }
+                }}>{item.prenom} {item.nom} </Link>
                  
                 </li>
               ))}

@@ -3,10 +3,13 @@ import React from "react";
 import Date from "../date.jsx";
 import Utilisateur from "../utilisateur.jsx";
 
+import FormulaireReponse from "./formulaire_reponse.jsx"
 
 class Affichage_reponses extends React.Component {
  
     constructor(props) {
+      
+      
      
       super(props);
       this.state = {
@@ -14,26 +17,28 @@ class Affichage_reponses extends React.Component {
         isLoaded: false,
         items: [],
         id_article: props.id_article
+        
        
       };
+      
       
       
     }
 
   
     componentDidMount() {
-        console.log(this.state.id_article)
         fetch("http://localhost:3001/api/articles/afficher_reponses/" + this.state.id_article)
         .then(res => res.json())
         .then(
             (result) => {
-            
-            this.setState({
-                isLoaded: true,
-                items: result
-            });
-            
-            },
+             
+              
+                this.setState({
+                  isLoaded: true,
+                  items: result
+                });
+              
+           },
         
         
             (error) => {
@@ -48,7 +53,8 @@ class Affichage_reponses extends React.Component {
   
   
     render() {
-        const { error, isLoaded, items } = this.state;
+        const { error, isLoaded, items  } = this.state;
+       
         if (error) {
           return <div>Erreur : {error.message}</div>;
         } else if (!isLoaded) {
@@ -56,17 +62,20 @@ class Affichage_reponses extends React.Component {
         } else {
           return (
             <div>
-              {items.map(item => (
-                <div key={item.id}>
-                  <ul>
+               
+              {items.message != false &&  
+              items.map(item => (
+                <ul key={item.id}>
+                  
                     <Utilisateur id_utilisateur={item.id_utilisateur}/>
                     <li>{item.contenu}</li>
                     <Date date={item.date}/>
+                   
                     
-                    
-                  </ul>
-                </div>
+                 
+                </ul>
               ))}
+               < FormulaireReponse id_article = {this.state.id_article} />
             </div>
           );
         }

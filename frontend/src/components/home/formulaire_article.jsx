@@ -4,8 +4,8 @@ class FormulaireArticle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "Ecrivez le titre de l'article",
-      contenu: 'Écrivez un article que vous souhaitez partager avec vos collègues'
+      title: "",
+      contenu: ''
       
     };
 
@@ -27,8 +27,9 @@ class FormulaireArticle extends React.Component {
     var envoie_article = { contenu ,title};
         
     envoie_article = JSON.stringify(envoie_article);
-    
-    fetch(" http://localhost:3001/api/articles/creation_article/1", {
+    var id_Utilisateur = localStorage.getItem("user_id");
+   
+    fetch(" http://localhost:3001/api/articles/creation_article/" + id_Utilisateur, {
         method: "POST",
         body: envoie_article,
     
@@ -44,19 +45,20 @@ class FormulaireArticle extends React.Component {
           
       })
     event.preventDefault();
+    window.location.reload();
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        
-        <div className="form-group">
+      <form id="formulaire_article"onSubmit={this.handleSubmit}>
+        <h1>Ecrivez un article</h1>
+        <div className="formulaire_article_element">
           <label htmlFor="title">Titre de l'article</label>
-          <input type="text" name="title" placeholder="title" value={this.state.title} onChange={this.handleChange} required />
+          <input type="text" name="title"  value={this.state.title} onChange={this.handleChange} required />
         </div>
-        <div className="form-group">
+        <div className="formulaire_article_element">
           <label htmlFor="contenu">Article</label>
-          <input style={{width:"500px",height:"100px"}} type="contenu" name="contenu" placeholder="contenu" value={this.state.contenu} onChange={this.handleChange} required />
+          <input style={{width:"500px",height:"100px"}} type="contenu" name="contenu"  value={this.state.contenu} onChange={this.handleChange} required />
        </div>
         <input type="submit" value="Envoyer" />
       </form>

@@ -1,7 +1,7 @@
 import React from "react";
 import loginImg from "../images/login.png";
 import Formulaire_register from "../components/register-login/formulaire_register";
-/*
+
 export class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -41,6 +41,8 @@ export class Register extends React.Component {
         if(user.status === 200){
           
                 
+          localStorage.setItem("token", user.token);
+          localStorage.setItem("user_id", user.userId);
           window.location.reload();
                 
         }
@@ -56,7 +58,7 @@ export class Register extends React.Component {
 
   render() {
     return (
-      <div className="base-container" ref={this.props.containerRef}>
+      <section className="base-container" ref={this.props.containerRef}>
         <div className="header">Inscription</div>
         <div className="content">
           <div className="image">
@@ -87,69 +89,9 @@ export class Register extends React.Component {
           </form>
         </div>
         
-      </div>
+      </section>
     );
   }
 }
-*/
-export class Register extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      prenom: "",
-      nom: "",
-      email: "",
-      password: "",
-      password_confirmation: "",
-    };
-    
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  }
 
-  handleSubmit(event) {
-    const { email, password,nom,prenom } = this.state;
-    var envoyer_formulaire = { password , email ,nom,prenom};
-        
-    envoyer_formulaire = JSON.stringify(envoyer_formulaire);
-        
-    fetch(" http://localhost:3001/api/utilisateurs/inscription", {
-      method: "POST",
-      body: envoyer_formulaire,
-        
-      headers: {
-      'Content-Type': 'application/json'
-      },
-        
-      }).then((user) => {
-       
-        if(user.status === 200){
-          
-                
-          window.location.reload();
-                
-        }
-            
-            
-      })
-      .catch(error => {
-        console.log(error)
-      })
-    
-    event.preventDefault();
-  }
-
-  render() {
-    return (
-      <div className="base-container" ref={this.props.containerRef}>
-        <Formulaire_register />
-       </div>
-    );
-  }
-}
 export default Register

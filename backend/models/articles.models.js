@@ -74,6 +74,19 @@ Article.recuperer_reponses = (id, result) => {
   });
 };
 
+Article.recuperer_administrateur = result => {
+  sql.query("SELECT * FROM articles Order by date DESC ", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    
+    result(null, res);
+  });
+};
+
 Article.recuperer_message_profil = (id, result) => {
   
   sql.query(`Select * From articles Where id_utilisateur= '${id}' `, (err, res) => {

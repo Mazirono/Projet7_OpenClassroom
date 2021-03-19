@@ -1,0 +1,90 @@
+
+
+form{
+    margin-top: 100px;
+}
+
+#header{
+    border:0;
+  outline:none;
+  border-radius:0;
+  padding:15px 0;
+  font-size:2rem;
+  
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  background:$main;
+  color:$white;
+  
+  -webkit-appearance: none;
+  &:hover, &:focus {
+    background:$main-dark;
+  }
+}
+//Section 
+#section_accueil{
+    text-align: center;
+    margin-top: 150px;
+}
+
+#formulaire_article{
+  border-radius: 15px;
+  background-color : #FFD9D1;
+  width: 60%;
+  margin-left: auto;
+  margin-right : auto;
+  margin-bottom : 50px;
+  h1{
+    font-family: Georgia, sans-serif;
+    font-size : 30px;
+   
+  }
+  .formulaire_article_element{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    &:first-child{
+      width: 60%;
+    }
+    &:nth-child(2){
+      width: 60%;
+    }
+  
+    input{
+      margin: auto;
+      border-radius: 5px 10px 0 5px;
+      &:first-child{
+
+      }
+      &:nth-child(2){
+        width: 60%;
+      }
+    }
+   
+
+  }
+ 
+}
+.articles{
+  margin-top: 40px;
+  width: 60%;
+  margin: auto;
+  .article{
+    display: flex;
+    flex-wrap: wrap;
+    
+    .element_article{
+      &:first-child{
+        width: 30%;
+      }
+      &:nth-child(2){
+        width: 70%;
+      }
+      &:nth-child(3), &:nth-child(4) ,&:nth-child(5){
+        width: 100%;
+      }
+   
+
+    }
+  }
+}

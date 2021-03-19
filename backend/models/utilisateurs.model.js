@@ -27,7 +27,7 @@ Utilisateur.verification_email = (email, result) => {
     
     if (err) {
       console.log("Erreur dans la procédure: ", err);
-      result(err, null);
+      result(err, "b");
       return;
     }
 
@@ -65,7 +65,7 @@ Utilisateur.suppression_utilisateur = (id, result) => {
 
 Utilisateur.recuperer_utilisateur= (id, result) => {
   sql.query(`Select * From utilisateurs Where id= '${id}' `, (err, res) => {
-   
+    
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -73,7 +73,7 @@ Utilisateur.recuperer_utilisateur= (id, result) => {
     }
 
     if (res.length) {
-      console.log("found email: ", res);
+     
       result(null, res);
       return;
     }

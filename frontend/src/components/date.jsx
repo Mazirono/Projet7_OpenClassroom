@@ -15,7 +15,7 @@ function Date(props) {
 
 
    
-    return <li>Message envoyé le {jour}/{mois}/{année} à {heure}h{minute}</li>;
+    return <li className="element_article">Message envoyé le {jour}/{mois}/{année} à {heure}h{minute}</li>;
 }
 
 export default Date;

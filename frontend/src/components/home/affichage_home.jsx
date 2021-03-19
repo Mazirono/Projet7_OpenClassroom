@@ -9,22 +9,37 @@ import Affichage_reponses from "./affichage_reponses.jsx";
 class Affichage_accueil extends React.Component {
  
     constructor(props) {
-     
+      const token = localStorage.getItem("token")
+      console.log(token)
       super(props);
       this.state = {
         error: null,
         isLoaded: false,
-        items: [],
-        commentaires: 0 
+        articles: [],
+        commentaires: [],
+        
       };
       
     }
 
     handleClick = (item_id) => {
-     
-      this.setState({
-        commentaires : item_id
-      });
+      if(this.state.commentaires.indexOf(item_id) == -1){
+       
+        this.setState({
+          commentaires :  this.state.commentaires.concat(item_id),
+         
+        });
+
+      }
+      else if(this.state.commentaires.indexOf(item_id) > -1){
+        var index = this.state.commentaires.indexOf(item_id)
+        this.state.commentaires.splice(index, 1);
+        this.setState({
+          commentaires : this.state.commentaires
+        });
+      }
+      
+      
     }
   
   
@@ -36,7 +51,7 @@ class Affichage_accueil extends React.Component {
             
             this.setState({
               isLoaded: true,
-              items: result
+              articles: result
             });
             
           },
@@ -53,28 +68,32 @@ class Affichage_accueil extends React.Component {
   
   
     render() {
-        const { error, isLoaded, items } = this.state;
+        const { error, isLoaded, articles } = this.state;
+        
         if (error) {
           return <div>Erreur : {error.message}</div>;
         } else if (!isLoaded) {
           return <div>Chargement…</div>;
         } else {
           return (
-            <div>
-              {items.map(item => (
-                <div key={item.id}>
-                  <ul>
+            <div className="articles">
+              {articles.map(item => (
+                <ul key={item.id} className="article">
+                  
+                 
                     <Utilisateur id_utilisateur={item.id_utilisateur}/>
-                    <li>{item.titre}</li>
-                    <li>{item.contenu}</li>
                     <Date date={item.date}/>
-                    <li onClick={() => this.handleClick(item.id)}  ><Nombre_commentaire id_article= {item.id}  /> </li>
+                    <li className="element_article">{item.titre}</li>
+                    <li className="element_article">{item.contenu}</li>
                     
-                    {item.id ===this.state.commentaires  &&
+                    <li className="element_article" onClick={() => this.handleClick(item.id)}  ><Nombre_commentaire id_article= {item.id}  /> </li>
+                   
+                    {this.state.commentaires.indexOf(item.id) > -1  && 
                       <Affichage_reponses id_article = {item.id}/>
+                     
                     } 
                   </ul>
-                </div>
+                
               ))}
             </div>
           );

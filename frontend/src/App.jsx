@@ -3,12 +3,12 @@ import React from "react";
 
 
 //scss
-import "./scss/register-login.scss";
-import "./scss/header.scss";
-import "./scss/home.scss";
+
+import "./scss/main.scss";
 
 //components
-import { Header} from "./components/header.jsx";
+import { Header} from "./components/structure_pages/header.jsx";
+import { Footer} from "./components/structure_pages/footer.jsx";
 
 
 //pages
@@ -16,8 +16,10 @@ import {Register} from "./pages/register.jsx";
 import {Login} from "./pages/login.jsx";
 import {Accueil} from "./pages/home.jsx";
 import {Profil} from "./pages/profil.jsx";
+import {Administrateur} from "./pages/administrateur.jsx";
 
 import { BrowserRouter, Switch, Route,Redirect} from "react-router-dom";
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous"></link>
 
 class App extends React.Component {
   constructor(props) {
@@ -31,9 +33,8 @@ class App extends React.Component {
 
   componentDidMount() {
     const isAuth = !!localStorage.getItem("token");
-    if(isAuth === 3){
-    this.rightSide.classList.add("right");
-    }
+   
+    
   }
 
   changeState() {
@@ -52,12 +53,14 @@ class App extends React.Component {
   }
 
   render() {
+   
     const { isLogginActive } = this.state;
     const current = isLogginActive ? "Inscription" : "Connexion";
     const currentActive = isLogginActive ? "login" : "register";
    
     const isAuth = !!localStorage.getItem("token");
-    console.log(isAuth)
+    const isAdmin = !!localStorage.getItem("administrateur");
+    
     return (
     
       <BrowserRouter>
@@ -100,23 +103,36 @@ class App extends React.Component {
             <Redirect to="/" />
            
           } 
+          
           <Accueil />
+          
       
             
         </Route>
 
-        <Route exact path="/profil">  
+        <Route exact path="/profil" component={Profil}>  
         
           {!isAuth &&
           
               <Redirect to="/" />
             
           } 
-          <Profil />
+          
+        </Route>
+        <Route exact path="/administrateur">  
+        
+          { !isAdmin &&
+          
+              <Redirect to="/" />
+            
+          } 
+          <Administrateur />
         </Route>
 
         </Switch>
-        
+        {isAuth &&
+        <Footer/>
+      } 
       </BrowserRouter>
     
     );

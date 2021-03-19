@@ -11,22 +11,23 @@ export class Formulaire_register extends React.Component {
         email: "",
         password: "",
       };
-     
+      
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleChange = this.handleChange.bind(this);
-      console.log(this.state)
+      
+      
     }
     handleChange(event) {
-      this.setState({
-        [event.target.name]: event.target.value
-      });
+      
+      this.setState({ prenom: event.target.value});
+      
     }
-  
+    
     handleSubmit(event,props) {
       console.log(props)
       const { email, password,nom,prenom } = this.state;
       var envoyer_formulaire = { password , email ,nom,prenom};
-          
+      this.handleChange() 
       envoyer_formulaire = JSON.stringify(envoyer_formulaire);
       
       fetch(" http://localhost:3001/api/utilisateurs/inscription", {
@@ -64,11 +65,11 @@ export class Formulaire_register extends React.Component {
               <img src={loginImg} />
             </div>
             <form onSubmit={this.handleSubmit}>
-                 <Element_formulaire field={"prenom"} label={"Prenom"} />
+                 <Element_formulaire saisie={this.handleChange} field={"prenom"} label={"Prenom"} />
                  <Element_formulaire field={"nom"} label={"Nom"} />
                  <Element_formulaire field={"email"} label={"Email"} />
                  <Element_formulaire field={"password"} label={"Mot de passe"} />
-              
+                  
            
               <div className="footer">
                 <button type="submit" className="btn">

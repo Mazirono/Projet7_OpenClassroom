@@ -53,7 +53,7 @@ class Nombre_commentaire extends React.Component {
                 {items.length &&
                  <button>{items.length} commentaires</button>
                 } 
-                {items.message &&
+                {items.message == false &&
                  <button>0 commentaire</button>
                 } 
                 

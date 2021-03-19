@@ -1,6 +1,7 @@
 import React from "react";
 import loginImg from "../images/login.png";
 import { Redirect} from "react-router-dom";
+import Verification_administrateur from "../components/administrateur/verification_administrateur";
 
 export class Login extends React.Component {
   constructor(props) {
@@ -43,7 +44,8 @@ export class Login extends React.Component {
               
               localStorage.setItem("token", res.token);
               localStorage.setItem("user_id", res.userId);
-              window.location.reload();
+              Verification_administrateur(res.userId)
+            
               
             })
                 
@@ -54,13 +56,13 @@ export class Login extends React.Component {
       .catch(error => {
         console.log(error)
       })
-    
+     
     event.preventDefault();
   }
 
   render() {
     return (
-      <div className="base-container" ref={this.props.containerRef}>
+      <section className="base-container" ref={this.props.containerRef}>
         <div className="header">Connexion</div>
         <div className="content">
           <div className="image">
@@ -85,7 +87,7 @@ export class Login extends React.Component {
 
         </div>
        
-      </div>
+      </section >
         
     );
   }
