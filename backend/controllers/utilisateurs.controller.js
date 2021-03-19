@@ -47,7 +47,6 @@ router.inscription = (req, res, next) => {
 };
 
 
-
 router.connexion = (req, res, next) => {
   Utilisateur.verification_email(req.body.email, (response, data) => {
     
@@ -75,12 +74,9 @@ router.connexion = (req, res, next) => {
               'RANDOM_TOKEN_SECRET',
               { expiresIn: '24h' }
             )
-  
-           
           });
-          
         })
-       
+        .catch(error => res.status(500).json({ error }));
         
       }
       
