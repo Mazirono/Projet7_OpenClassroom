@@ -50,18 +50,25 @@ class FormulaireArticle extends React.Component {
 
   render() {
     return (
-      <form id="formulaire_article"onSubmit={this.handleSubmit}>
-        <h1>Ecrivez un article</h1>
+      
+      <form className="form-group" id="formulaire_article"onSubmit={this.handleSubmit}>
+        <div className="formulaire_article_element">
+           <h1>Ecrivez un article</h1>
+        </div>
         <div className="formulaire_article_element">
           <label htmlFor="title">Titre de l'article</label>
           <input type="text" name="title"  value={this.state.title} onChange={this.handleChange} required />
         </div>
+
         <div className="formulaire_article_element">
           <label htmlFor="contenu">Article</label>
-          <input style={{width:"500px",height:"100px"}} type="contenu" name="contenu"  value={this.state.contenu} onChange={this.handleChange} required />
+         <textarea type="contenu" name="contenu"  value={this.state.contenu} onChange={this.handleChange} className="form-control"  rows="3"></textarea>
        </div>
-        <input type="submit" value="Envoyer" />
+       <div className="formulaire_article_element">
+        <button type="button" className="btn btn-primary" type="submit">Envoyer</button>
+       </div>
       </form>
+      
     );
   }
 }

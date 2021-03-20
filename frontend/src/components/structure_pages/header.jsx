@@ -33,10 +33,11 @@ export class Header extends React.Component {
                   }
                 }}>Profil </Link>
             <a href="/administrateur">Administrateur</a>
+            
             <button id="button_header"onClick={this.handleClick} >  Déconnexion</button>
           </nav>
-      
-        
+          
+          <i className="fas fa-sign-out-alt"></i>
         </header>
       )
       

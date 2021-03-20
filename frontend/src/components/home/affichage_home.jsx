@@ -1,4 +1,6 @@
 import React from "react";
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 import Date from "../date.jsx";
 import Utilisateur from "../utilisateur.jsx";
@@ -77,23 +79,25 @@ class Affichage_accueil extends React.Component {
         } else {
           return (
             <div className="articles">
+           
+           
               {articles.map(item => (
                 <ul key={item.id} className="article">
                   
                  
-                    <Utilisateur id_utilisateur={item.id_utilisateur}/>
-                    <Date date={item.date}/>
-                    <li className="element_article">{item.titre}</li>
-                    <li className="element_article">{item.contenu}</li>
-                    
-                    <li className="element_article" onClick={() => this.handleClick(item.id)}  ><Nombre_commentaire id_article= {item.id}  /> </li>
+                  <Utilisateur id_utilisateur={item.id_utilisateur} className="element_article"/>
+                  <Date date={item.date} className="element_article"/>
+                  <li className="element_article">{item.titre}</li>
+                  <li className="element_article">{item.contenu}</li>
+                  
+                  <li className="element_article" onClick={() => this.handleClick(item.id)}  ><Nombre_commentaire id_article= {item.id}  /> </li>
+                 
+                  {this.state.commentaires.indexOf(item.id) > -1  && 
+                    <Affichage_reponses id_article = {item.id}/>
                    
-                    {this.state.commentaires.indexOf(item.id) > -1  && 
-                      <Affichage_reponses id_article = {item.id}/>
-                     
-                    } 
-                  </ul>
-                
+                  } 
+                </ul>
+            
               ))}
             </div>
           );

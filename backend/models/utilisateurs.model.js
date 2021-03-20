@@ -27,7 +27,7 @@ Utilisateur.verification_email = (email, result) => {
     
     if (err) {
       console.log("Erreur dans la procédure: ", err);
-      result(err, "b");
+      result(err, "null");
       return;
     }
 

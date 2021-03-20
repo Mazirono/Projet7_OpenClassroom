@@ -10,6 +10,7 @@ class Utilisateur extends React.Component {
         error: null,
         isLoaded: false,
         items: [],
+        className: props.className
         
       };
       
@@ -52,10 +53,10 @@ class Utilisateur extends React.Component {
           return <div>Chargement…</div>;
         } else {
           return (
-            <div className="element_article">
+            <div className={this.state.className}>
                {items.map(item => (
                  
-                <li key={item.id}>
+                <li key={item.id} className="card-title">
                   
                   
                   <Link to={{

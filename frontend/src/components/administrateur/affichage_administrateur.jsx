@@ -61,19 +61,20 @@ class Affichage_administrateur extends React.Component {
           return <div>Chargement…</div>;
         } else {
           return (
-            <div>
+            <div className="administrateurs">
+              <h1>Pannel administrateur</h1>
               {items.map(item => (
-                <div key={item.id}>
-                  <ul>
-                    <Utilisateur id_utilisateur={item.id_utilisateur}/>
-                    <li>{item.titre}</li>
-                    <li>{item.contenu}</li>
-                    <Date date={item.date}/>
-                    <li onClick={() => this.handleClick(item.id)}  ><Nombre_commentaire id_article= {item.id}  /> </li>
-                    <Bouton_supprimer id_article= {item.id}/>
+                <ul  className="messages_administrateur" key={item.id}>
+                 
+                    <Utilisateur  className="element_messages_administrateur " id_utilisateur={item.id_utilisateur}/>
+                    <Date date={item.date} className="element_messages_administrateur"/>
+                    <li className="element_messages_administrateur">{item.titre}</li>
+                    <li className="element_messages_administrateur">{item.contenu}</li>
                     
-                  </ul>
-                </div>
+                    <Bouton_supprimer  className="element_messages_administrateur" id_article= {item.id}/>
+                    
+                 
+                </ul>
               ))}
             </div>
           );

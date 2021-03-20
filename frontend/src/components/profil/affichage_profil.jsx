@@ -76,7 +76,7 @@ class Affichage_profil extends React.Component {
           return <div>Chargement…</div>;
         } else {
           return (
-            <div>
+            <div className="messages_profil">
               {profil_information.map(item => (
                 <ul key={item.id}>
                     <h1> Vous êtes sur le profil de {item.prenom} {item.nom} </h1>
@@ -84,17 +84,17 @@ class Affichage_profil extends React.Component {
               ))}
               
               {profil_messages.map(item => (
-                <ul key={item.id}>
-                   {item.id_article === null &&
-                        <li>{item.titre}</li>
-                        &&
-                        <li>article</li>
+                <ul key={item.id} className="message_profil">
+                   {/*item.id_article === null &&
+                        <li>{item.titre}</li>*/
+                        
                    } 
-                  {item.id_article != null &&
-                        <li>Réponse à l'article {item.id_article}</li>
+                  {/*item.id_article != null &&
+                        <li>Réponse à l'article {item.id_article}</li>*/
                    } 
-                  <li>{item.contenu}</li>
-                  <Date date={item.date}/>
+                   <Date date={item.date} className='element_message_profil'/>
+                  <li  className='element_message_profil'>{item.contenu} </li>
+                  
                 </ul>
               ))}
             </div>

@@ -10,6 +10,7 @@ import "./scss/main.scss";
 import { Header} from "./components/structure_pages/header.jsx";
 import { Footer} from "./components/structure_pages/footer.jsx";
 
+import 'font-awesome/css/font-awesome.min.css';
 
 //pages
 import {Register} from "./pages/register.jsx";
@@ -19,11 +20,12 @@ import {Profil} from "./pages/profil.jsx";
 import {Administrateur} from "./pages/administrateur.jsx";
 
 import { BrowserRouter, Switch, Route,Redirect} from "react-router-dom";
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous"></link>
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    
     
     this.state = {
       isLogginActive: true
@@ -32,8 +34,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const isAuth = !!localStorage.getItem("token");
-   
+    
     
   }
 
@@ -53,16 +54,17 @@ class App extends React.Component {
   }
 
   render() {
-   
+    const isAuth = !!localStorage.getItem("token");
+    const isAdmin = !!localStorage.getItem("administrateur");
     const { isLogginActive } = this.state;
     const current = isLogginActive ? "Inscription" : "Connexion";
     const currentActive = isLogginActive ? "login" : "register";
    
-    const isAuth = !!localStorage.getItem("token");
-    const isAdmin = !!localStorage.getItem("administrateur");
+   
     
     return (
-    
+      
+      
       <BrowserRouter>
       {isAuth &&
         <Header />
@@ -99,12 +101,20 @@ class App extends React.Component {
         <Route exact path="/accueil">  
         
         {!isAuth &&
-        
+            <RightSide
+            current={current}
+            currentActive={currentActive}
+            containerRef={ref => (this.rightSide = ref)}
+            onClick={this.changeState.bind(this)}
+          /> &&
             <Redirect to="/" />
+            
+            
            
-          } 
-          
+        } 
+          {isAuth &&
           <Accueil />
+          }
           
       
             
@@ -126,6 +136,7 @@ class App extends React.Component {
               <Redirect to="/" />
             
           } 
+          
           <Administrateur />
         </Route>
 

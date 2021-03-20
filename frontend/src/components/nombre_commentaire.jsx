@@ -51,18 +51,13 @@ class Nombre_commentaire extends React.Component {
           return (
             <div>
                 {items.length &&
-                 <button>{items.length} commentaires</button>
+                 <button type="button" class="btn btn-primary">{items.length} commentaires</button>
                 } 
                 {items.message == false &&
-                 <button>0 commentaire</button>
+                 <button type="button" class="btn btn-primary">0 commentaire</button>
                 } 
                 
-               
-                
-              
-                 
-              
-            </div>
+          </div>
           );
         }
       }

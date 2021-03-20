@@ -11,9 +11,20 @@ body{
     
     padding: 0;
     margin: 0;
+    background-image: url("../../images/icon.png");
+    background-repeat: no-repeat;
+    
+    background-position: right;
+  
 }
 
 
 li{
     list-style:none;
 }
+
+section{
+    text-align: center;
+    margin-top: 150px;
+  }
+  

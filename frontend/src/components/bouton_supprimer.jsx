@@ -35,7 +35,7 @@ class Bouton_supprimer extends React.Component {
     render() {
        
         return (
-            <button  onClick={this.handleClick}> Supprimer message</button>
+            <button onClick={this.handleClick} type="button" class="btn btn-primary">Supprimer message</button>
         );
     }
       

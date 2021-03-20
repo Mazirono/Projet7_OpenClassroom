@@ -6,7 +6,7 @@ class FormulaireReponse extends React.Component {
     
     this.state = {
       id_article : props.id_article,
-      contenu: 'Écrivez un article que vous souhaitez partager avec vos collègues'
+      contenu: 'Écrivez un commentaire'
       
     };
 
@@ -49,14 +49,15 @@ class FormulaireReponse extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="formulaire_reponse ">
         
         
-        <div className="form-group">
-          <label htmlFor="contenu">Commentaire</label>
-          <input style={{width:"500px",height:"100px"}} type="contenu" name="contenu" placeholder="contenu" value={this.state.contenu} onChange={this.handleChange} required />
+      <div className="formulaire_reponse_element" >
+      <textarea type="contenu" name="contenu"  value={this.state.contenu} onChange={this.handleChange}class="form-control"  rows="3"></textarea>
        </div>
-        <input type="submit" value="Envoyer" />
+       <div className="formulaire_reponse_element" >
+          <button type="button" class="btn btn-primary" type="submit">Envoyer</button>
+        </div>
       </form>
     );
   }

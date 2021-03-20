@@ -1,14 +1,11 @@
 
 
-form{
-    margin-top: 100px;
-}
 
 #header{
-    border:0;
+  border:0;
   outline:none;
   border-radius:0;
-  padding:15px 0;
+  
   font-size:2rem;
   
   text-transform:uppercase;
@@ -21,70 +18,163 @@ form{
     background:$main-dark;
   }
 }
-//Section 
-#section_accueil{
-    text-align: center;
-    margin-top: 150px;
-}
+
+
+// articles 
 
 #formulaire_article{
   border-radius: 15px;
-  background-color : #FFD9D1;
+  background-color: #fff;
+  
+  box-shadow: 0px 0px 12px 2px rgb(15 15 15 / 20%);
   width: 60%;
   margin-left: auto;
   margin-right : auto;
   margin-bottom : 50px;
   h1{
-    font-family: Georgia, sans-serif;
-    font-size : 30px;
-   
-  }
+      font-family: Georgia, sans-serif;
+      font-size : 30px;
+      text-align: center;
+    }
+    
+
   .formulaire_article_element{
     display: flex;
     flex-direction: column;
     margin: auto;
     &:first-child{
+      
       width: 60%;
     }
     &:nth-child(2){
       width: 60%;
+     
     }
-  
+    
+    label{
+      margin : auto; 
+      
+    }
+    textarea{
+        margin : auto;
+        border-radius: 5px 10px 0 5px;
+        width: 60%;
+        height: 200px;
+    }
     input{
+      height: 20px;
       margin: auto;
       border-radius: 5px 10px 0 5px;
-      &:first-child{
-
-      }
-      &:nth-child(2){
-        width: 60%;
-      }
+      width: 60%;
     }
-   
+    .btn{
 
+      margin-left : auto;
+      margin-right :auto;
+      margin-top: 20px;
+      margin-bottom : 20px;
+    }
+    
   }
- 
+
 }
+
 .articles{
+ 
   margin-top: 40px;
   width: 60%;
   margin: auto;
-  .article{
-    display: flex;
-    flex-wrap: wrap;
-    
-    .element_article{
-      &:first-child{
-        width: 30%;
-      }
-      &:nth-child(2){
-        width: 70%;
-      }
-      &:nth-child(3), &:nth-child(4) ,&:nth-child(5){
-        width: 100%;
-      }
-   
+    .article{
+      margin-bottom: 50px;
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      box-shadow: 0px 0px 12px 2px rgb(15 15 15 / 20%);
+      border-radius: 8px;
+      padding: 0;
 
+      a{
+        font-size: 20px;
+        text-decoration: none;
+        color:black;
+        font-weight: bold;
+      }
+      .element_article{
+        &:first-child{
+          margin-top: 20px;
+          text-align: left;
+        }
+        &:nth-child(2){
+          text-align: left;
+          margin-left:auto ;
+          font-weight: bold;
+          
+        }
+        &:nth-child(3){
+          font-size : 34px;
+          margin-top: 10px;
+          margin-bottom:20px ;
+        }
+        &:nth-child(4){
+          margin-bottom: 27px;
+          font-size : 18px;
+        }
+        &:nth-child(5){
+          margin-bottom:20px ;
+        }
+        &:first-child ,&:nth-child(2){
+          margin-left: 10% ;
+        }
+        &:nth-child(3), &:nth-child(4) ,&:nth-child(5){
+          width: 70%;
+          margin-left:auto ;
+          margin-right:auto ;
+        }
+    
+
+      }
+  }
+}
+
+//réponses 
+.formulaire_reponse {
+  display :flex;
+  margin-bottom: 30px;
+  textarea{
+    margin-left: 15%;
+    border-radius: 17px;
+    width: 90%;
+  }
+  .formulaire_reponse_element{
+    &:first-child{
+      width: 60%;
+    }
+    &:nth-child(2){
+      width: 40%;
+      height : 50px;
+     margin-top: auto;
+     margin-bottom: auto;
+     
+    }
+  }
+
+}
+.reponses{
+  
+  width: 100%;
+  
+  .reponse{
+    padding: 0;
+    .element_reponse{
+     
+      &:nth-child(3){
+        
+        font-size: 20px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+      
+        
+      }
     }
   }
 }

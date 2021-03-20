@@ -4,7 +4,7 @@ import React from "react";
 function Date(props) {
     var date =  props.date
     
-
+   console.log(props)
     var année = date.slice(0, 4)
     var mois = date.slice(5,7)
     var jour = date.slice(8, 10)
@@ -13,9 +13,8 @@ function Date(props) {
     var minute =  date.slice(14,16)
     
 
-
    
-    return <li className="element_article">Message envoyé le {jour}/{mois}/{année} à {heure}h{minute}</li>;
+    return <li className= {props.className+" card-subtitle mb-2 text-muted" }>Message envoyé le {jour}/{mois}/{année} à {heure}h{minute}</li>;
 }
 
 export default Date;

@@ -45,6 +45,7 @@ export class Login extends React.Component {
               localStorage.setItem("token", res.token);
               localStorage.setItem("user_id", res.userId);
               Verification_administrateur(res.userId)
+              window.location.reload();
             
               
             })
@@ -63,12 +64,13 @@ export class Login extends React.Component {
   render() {
     return (
       <section className="base-container" ref={this.props.containerRef}>
+        
         <div className="header">Connexion</div>
         <div className="content">
           <div className="image">
             <img src={loginImg} />
           </div>
-
+          
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email</label>
@@ -84,6 +86,9 @@ export class Login extends React.Component {
               </button>
             </div>
           </form>
+         
+
+
 
         </div>
        

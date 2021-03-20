@@ -61,21 +61,23 @@ class Affichage_reponses extends React.Component {
           return <div>Chargement…</div>;
         } else {
           return (
-            <div>
-               
+            <div className="reponses">
+              < FormulaireReponse id_article = {this.state.id_article} />
               {items.message != false &&  
               items.map(item => (
-                <ul key={item.id}>
+                <ul key={item.id} className="reponse">
                   
                     <Utilisateur id_utilisateur={item.id_utilisateur}/>
-                    <li>{item.contenu}</li>
                     <Date date={item.date}/>
+                    <li className="element_reponse">{item.contenu}</li>
+                    
+                   
                    
                     
                  
                 </ul>
               ))}
-               < FormulaireReponse id_article = {this.state.id_article} />
+              
             </div>
           );
         }
