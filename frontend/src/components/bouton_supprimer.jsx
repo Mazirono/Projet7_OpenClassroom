@@ -3,7 +3,7 @@ import React from "react";
 class Bouton_supprimer extends React.Component {
  
     constructor(props) {
-      console.log(props)
+      
       super(props);
       this.state = {
             id_article : props.id_article
@@ -20,6 +20,8 @@ class Bouton_supprimer extends React.Component {
 
         .then(res => res.text()) // or res.json()
         .then(res => console.log(res))
+
+        window.location.reload(false)
             
             
       
@@ -35,7 +37,7 @@ class Bouton_supprimer extends React.Component {
     render() {
        
         return (
-            <button onClick={this.handleClick} type="button" class="btn btn-primary">Supprimer message</button>
+            <button onClick={this.handleClick} type="button" className="btn btn-primary">Supprimer message</button>
         );
     }
       

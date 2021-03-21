@@ -18,8 +18,10 @@ import {Login} from "./pages/login.jsx";
 import {Accueil} from "./pages/home.jsx";
 import {Profil} from "./pages/profil.jsx";
 import {Administrateur} from "./pages/administrateur.jsx";
+import {Deconnexion} from "./pages/deconnexion.jsx";
 
 import { BrowserRouter, Switch, Route,Redirect} from "react-router-dom";
+
 
 
 class App extends React.Component {
@@ -33,14 +35,12 @@ class App extends React.Component {
     
   }
 
-  componentDidMount() {
-    
-    
-  }
+ 
 
   changeState() {
-    const { isLogginActive } = this.state;
     
+    const { isLogginActive } = this.state;
+      
       if (isLogginActive) {
         this.rightSide.classList.remove("right");
         this.rightSide.classList.add("left");
@@ -54,13 +54,13 @@ class App extends React.Component {
   }
 
   render() {
+ 
     const isAuth = !!localStorage.getItem("token");
     const isAdmin = !!localStorage.getItem("administrateur");
     const { isLogginActive } = this.state;
     const current = isLogginActive ? "Inscription" : "Connexion";
     const currentActive = isLogginActive ? "login" : "register";
-   
-   
+  
     
     return (
       
@@ -72,8 +72,8 @@ class App extends React.Component {
         <Switch>
           
           <Route exact path="/">  
-          
-           {isAuth &&
+
+           {isAuth && isLogginActive && 
             <Redirect to="/accueil" />
             } 
             <div className="App">
@@ -97,48 +97,60 @@ class App extends React.Component {
            
           </Route>
        
-        
+         
         <Route exact path="/accueil">  
         
-        {!isAuth &&
-            <RightSide
-            current={current}
-            currentActive={currentActive}
-            containerRef={ref => (this.rightSide = ref)}
-            onClick={this.changeState.bind(this)}
-          /> &&
-            <Redirect to="/" />
+            {!isAuth &&
+              
+              <Redirect to="/" /> 
+              } 
+              
             
+               
+               
+                
             
-           
-        } 
-          {isAuth &&
+      
+            {isAuth &&
           <Accueil />
           }
           
-      
-            
         </Route>
 
-        <Route exact path="/profil" component={Profil}>  
+        <Route exact path="/profil" component={Profil }>  
         
           {!isAuth &&
           
-              <Redirect to="/" />
             
+           
+              <Redirect to="/" /> 
+              
+            
+            
+               
           } 
+           
+                
+           
           
         </Route>
+         {
         <Route exact path="/administrateur">  
         
           { !isAdmin &&
-          
+
               <Redirect to="/" />
             
           } 
           
-          <Administrateur />
+            <Administrateur />
+           
+           
+           
+          
+         
         </Route>
+        }
 
         </Switch>
         {isAuth &&
@@ -155,7 +167,8 @@ class App extends React.Component {
 const RightSide = props => {
   return (
     <div
-      className="right-side"
+    id="right"
+      className="right-side right"
       ref={props.containerRef}
       onClick={props.onClick}
     >

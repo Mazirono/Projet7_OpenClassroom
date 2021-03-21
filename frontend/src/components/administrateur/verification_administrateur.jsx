@@ -7,15 +7,12 @@ function Verification_administrateur(userId) {
         .then(
           (result) => {
             result.json().then(res => {
-                console.log(res[0]["administrateur"])
+              console.log(res[0]["administrateur"])
                 if (res[0]["administrateur"]){
                     
                     localStorage.setItem("administrateur", true);
                 }
-                else{
-                    console.log("Erreur pour récuperer un administrateur")
-
-            }
+                
               
             })
             

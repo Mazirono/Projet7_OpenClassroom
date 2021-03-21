@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 
-
 router.inscription = (req, res, next) => {
   if (!req.body) {
     res.status(400).send({
@@ -32,7 +31,20 @@ router.inscription = (req, res, next) => {
               message:
                 err.message || "Erreur dans la création de l'utilisateur"
             });
-          else res.send(data);
+          bcrypt.compare(req.body.password, data.password)
+            .then(valid => {
+              if (!valid) {
+                return res.status(401).json({ error: 'Mot de passe incorrect !' });
+              }
+              res.status(200).json({
+                userId : data.id,
+                token: jwt.sign(
+                  { userId: data.id },
+                  'RANDOM_TOKEN_SECRET',
+                  { expiresIn: '24h' }
+                )
+              });
+            })
         });
     })
       }
@@ -45,7 +57,6 @@ router.inscription = (req, res, next) => {
   })
     
 };
-
 
 router.connexion = (req, res, next) => {
   Utilisateur.verification_email(req.body.email, (response, data) => {
@@ -85,6 +96,8 @@ router.connexion = (req, res, next) => {
    
 };
 
+
+
 router.informations_utilisateur = (req, res) => {
   
   Utilisateur.recuperer_utilisateur(req.params.utilisateurId,(err, data) => {
@@ -97,6 +110,7 @@ router.informations_utilisateur = (req, res) => {
     else res.send(data);
   });
 };
+
 
 router.supprimer_utilisateur = (req, res) => {
   Utilisateur.suppression_utilisateur(req.params.utilisateurId, (err, data) => {

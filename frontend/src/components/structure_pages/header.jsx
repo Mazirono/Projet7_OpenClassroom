@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import withAuth from "../authentification/withAuth.jsx"; 
 
 export class Header extends React.Component {
@@ -10,15 +10,20 @@ export class Header extends React.Component {
   handleClick = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user_id");
-    localStorage.removeItem("administrateur")
-    window.location.reload();
-    localStorage.getItem("user_id")
+    localStorage.removeItem("administrateur");
+ 
+    <Redirect to="/"/>;
+    window.location.reload(false);
+
+    
   }
   handleClick2 = () => {
    
   }
     render() {
       var id_utilisateur = localStorage.getItem("user_id")
+      const isAdmin = !!localStorage.getItem("administrateur");
+      console.log(isAdmin)
       return(
         
         <header className="Header">
@@ -32,7 +37,18 @@ export class Header extends React.Component {
                     id_utilisateur:  id_utilisateur
                   }
                 }}>Profil </Link>
-            <a href="/administrateur">Administrateur</a>
+                
+                { isAdmin &&
+
+                    <Link to={{
+                      pathname: '/administrateur',
+                      
+                    }}>Administrateur </Link>
+
+                } 
+                {
+            
+            }
             
             <button id="button_header"onClick={this.handleClick} >  Déconnexion</button>
           </nav>

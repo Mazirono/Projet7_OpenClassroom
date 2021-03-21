@@ -28,13 +28,15 @@ class FormulaireArticle extends React.Component {
         
     envoie_article = JSON.stringify(envoie_article);
     var id_Utilisateur = localStorage.getItem("user_id");
-   
+    const token = localStorage.getItem("token")
     fetch(" http://localhost:3001/api/articles/creation_article/" + id_Utilisateur, {
         method: "POST",
         body: envoie_article,
     
         headers: {
+        'Authorization': token,
         'Content-Type': 'application/json'
+        
         },
       
       }).then(() => {

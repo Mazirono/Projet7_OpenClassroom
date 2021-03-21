@@ -1,7 +1,8 @@
 import React from "react";
 import loginImg from "../images/login.png";
-import Formulaire_register from "../components/register-login/formulaire_register";
 
+import withAuth from "../components/authentification/withAuth.jsx"; 
+import Verification_administrateur from "../components/administrateur/verification_administrateur";
 export class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -32,6 +33,7 @@ export class Register extends React.Component {
       method: "POST",
       body: envoyer_formulaire,
         
+    
       headers: {
       'Content-Type': 'application/json'
       },
@@ -41,9 +43,15 @@ export class Register extends React.Component {
         if(user.status === 200){
           
                 
-          localStorage.setItem("token", user.token);
-          localStorage.setItem("user_id", user.userId);
-          window.location.reload();
+          user.json().then(res => {
+            
+            localStorage.setItem("token", res.token);
+            localStorage.setItem("user_id", res.userId);
+            Verification_administrateur(res.userId)
+            window.location.reload(false);
+          
+            
+          })
                 
         }
             
@@ -59,7 +67,6 @@ export class Register extends React.Component {
   render() {
     return (
       <section className="base-container" ref={this.props.containerRef}>
-        <div className="header">Inscription</div>
         <div className="content">
           <div className="image">
             <img src={loginImg} />
@@ -94,4 +101,4 @@ export class Register extends React.Component {
   }
 }
 
-export default Register
+export default withAuth(Register)

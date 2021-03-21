@@ -2,9 +2,11 @@
 import React from "react";
 import Formulaire_article from "../components/home/formulaire_article";
 import Affichage_accueil from "../components/home/affichage_home";
+import withAuth from "../components/authentification/withAuth.jsx"; 
 export class Accueil extends React.Component {
   constructor(props) {
     super(props);
+    
   
   }
 
@@ -20,4 +22,4 @@ export class Accueil extends React.Component {
   }
 }
 
-export default Accueil ;
+export default withAuth(Accueil) ;

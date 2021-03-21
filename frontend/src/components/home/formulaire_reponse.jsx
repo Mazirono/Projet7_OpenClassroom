@@ -26,13 +26,14 @@ class FormulaireReponse extends React.Component {
     var envoie_article = { contenu,id_article};
         
     envoie_article = JSON.stringify(envoie_article);
-    
+    const token = localStorage.getItem("token")
     fetch(" http://localhost:3001/api/articles/creation_article/" + localStorage.getItem("user_id"), {
         method: "POST",
         body: envoie_article,
     
         headers: {
-        'Content-Type': 'application/json'
+          'Authorization': token,
+          'Content-Type': 'application/json'
         },
       
       }).then(() => {
@@ -53,10 +54,10 @@ class FormulaireReponse extends React.Component {
         
         
       <div className="formulaire_reponse_element" >
-      <textarea type="contenu" name="contenu"  value={this.state.contenu} onChange={this.handleChange}class="form-control"  rows="3"></textarea>
+      <textarea type="contenu" name="contenu"  value={this.state.contenu} onChange={this.handleChange}className="form-control"  rows="3"></textarea>
        </div>
        <div className="formulaire_reponse_element" >
-          <button type="button" class="btn btn-primary" type="submit">Envoyer</button>
+          <button type="button" className="btn btn-primary" type="submit">Envoyer</button>
         </div>
       </form>
     );

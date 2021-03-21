@@ -16,7 +16,7 @@ Article.creer_message = (newArticle, result) => {
         return;
       }
   
-      console.log("created Article: ", { id: res.insertId, ...newArticle });
+      
       result(null, { id: res.insertId, ...newArticle });
     });
 };
@@ -29,7 +29,6 @@ Article.suppression_article = (id, result) => {
     }
 
     if (res.affectedRows == 0) {
-      // not found Customer with the id
       result({ kind: "L'article n'existe pas" }, null);
       return;
     }
@@ -42,7 +41,7 @@ Article.suppression_article = (id, result) => {
 Article.recuperer_articles = result => {
   sql.query("SELECT * FROM articles WHERE id_article IS NULL Order by date DESC ", (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      
       result(null, err);
       return;
     }
@@ -54,7 +53,7 @@ Article.recuperer_articles = result => {
 
 
 Article.recuperer_reponses = (id, result) => {
-  sql.query(`Select * From articles Where id_article= '${id}' `, (err, res) => {
+  sql.query("Select * From articles Where id_article= ?", id , (err, res) => {
    
     if (err) {
       console.log("error: ", err);
@@ -63,12 +62,11 @@ Article.recuperer_reponses = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found email: ", res);
+     
       result(null, res);
       return;
     }
-    
-    // not found Customer with the id
+  
     result({ kind: "not_found" }, null);
     
   });
@@ -89,7 +87,7 @@ Article.recuperer_administrateur = result => {
 
 Article.recuperer_message_profil = (id, result) => {
   
-  sql.query(`Select * From articles Where id_utilisateur= '${id}' `, (err, res) => {
+  sql.query("Select * From articles Where id_utilisateur= ?" , id , (err, res) => {
    
     if (err) {
       console.log("error: ", err);
@@ -98,12 +96,11 @@ Article.recuperer_message_profil = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found email: ", res);
+     
       result(null, res);
       return;
     }
-    
-    // not found Customer with the id
+
     result({ kind: "not_found" }, null);
     
   });

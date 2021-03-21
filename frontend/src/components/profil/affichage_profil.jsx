@@ -21,14 +21,20 @@ class Affichage_profil extends React.Component {
     }
   
     componentDidMount() {
+      const token = localStorage.getItem("token");
+      fetch("http://localhost:3001/api/articles/messages_profil/" + this.state.id_Utilisateur, {
+        method: 'GET',
         
-      
-        fetch("http://localhost:3001/api/articles/messages_profil/" + this.state.id_Utilisateur)
-        .then(res => res.json())
+        headers: {
+            'Authorization': token, 
+              'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(res => res.json())
+       
         .then(
             (result) => {
               
-            
+           
             this.setState({
                 isLoaded: true,
                 profil_messages: result
@@ -43,14 +49,22 @@ class Affichage_profil extends React.Component {
             });
             }
         )
-        fetch("http://localhost:3001/api/utilisateurs/informations_utilisateur/" + this.state.id_Utilisateur )
-        .then(res => res.json())
+        
+      fetch("http://localhost:3001/api/utilisateurs/informations_utilisateur/" + this.state.id_Utilisateur, {
+        method: 'GET',
+        
+        headers: {
+            'Authorization': token, 
+              'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(res => res.json())
         .then(
             (result) => {
-            
+           
             this.setState({
                
                 profil_information: result
+                
             });
             
             },
@@ -77,26 +91,30 @@ class Affichage_profil extends React.Component {
         } else {
           return (
             <div className="messages_profil">
+            
               {profil_information.map(item => (
-                <ul key={item.id}>
+                
+                <ul key={item.id} className="message_profil">
                     <h1> Vous êtes sur le profil de {item.prenom} {item.nom} </h1>
+                    {profil_messages.message &&
+                      
+                    <li className='element_message_profil'  > Cet utilisateur n'a écrit aucun message pour le moment</li>
+                    }
                 </ul>
               ))}
               
-              {profil_messages.map(item => (
+              {profil_messages.message != "Nous avons retrouvé aucun message écrit par ce profil." &&
+              profil_messages.map(item => (
                 <ul key={item.id} className="message_profil">
-                   {/*item.id_article === null &&
-                        <li>{item.titre}</li>*/
-                        
-                   } 
-                  {/*item.id_article != null &&
-                        <li>Réponse à l'article {item.id_article}</li>*/
-                   } 
+
                    <Date date={item.date} className='element_message_profil'/>
                   <li  className='element_message_profil'>{item.contenu} </li>
                   
                 </ul>
               ))}
+             
+              
+
             </div>
           );
         }

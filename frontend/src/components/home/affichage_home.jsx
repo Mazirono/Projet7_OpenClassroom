@@ -5,14 +5,14 @@ import Card from 'react-bootstrap/Card';
 import Date from "../date.jsx";
 import Utilisateur from "../utilisateur.jsx";
 import Nombre_commentaire from "../nombre_commentaire.jsx";
-
+import withAuth from "../authentification/withAuth.jsx"; 
 import Affichage_reponses from "./affichage_reponses.jsx";
 
 class Affichage_accueil extends React.Component {
  
     constructor(props) {
-      const token = localStorage.getItem("token")
-      console.log(token)
+      
+    
       super(props);
       this.state = {
         error: null,
@@ -46,8 +46,16 @@ class Affichage_accueil extends React.Component {
   
   
     componentDidMount() {
-      fetch("http://localhost:3001/api/articles/afficher_articles")
-        .then(res => res.json())
+      const token = localStorage.getItem("token")
+      
+      fetch("http://localhost:3001/api/articles/afficher_articles", {
+        method: 'GET',
+        
+        headers: {
+            'Authorization': token, 
+              'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(res => res.json())
         .then(
           (result) => {
             
@@ -105,4 +113,4 @@ class Affichage_accueil extends React.Component {
       }
 }
 
-export default Affichage_accueil ;
+export default withAuth(Affichage_accueil) ;

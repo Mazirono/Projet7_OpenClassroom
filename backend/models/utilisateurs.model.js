@@ -21,9 +21,10 @@ Utilisateur.creer_utilisateur = (newUtilisateur, result) => {
   });
 };
 
-Utilisateur.verification_email = (email, result) => {
+
+Utilisateur.verification_email = (email,result) => {
   
-  sql.query(`SELECT * FROM utilisateurs WHERE email = '${email}'`, (err, res) => {
+  sql.query("SELECT * FROM utilisateurs WHERE email = ?", email, (err, res) => {
     
     if (err) {
       console.log("Erreur dans la procédure: ", err);
@@ -32,16 +33,20 @@ Utilisateur.verification_email = (email, result) => {
     }
 
     if (res.length) {
-      console.log("L'email existe déjà:", res[0]['email']);
+      
       result(null, res[0]);
+      
       return;
     }
     
     // not found Customer with the id
     result({ kind: "L'adresse email n'existe pas" }, null);
     
+    
   });
 };
+
+
 
 
 Utilisateur.suppression_utilisateur = (id, result) => {
@@ -58,13 +63,12 @@ Utilisateur.suppression_utilisateur = (id, result) => {
       return;
     }
 
-    console.log("Suppression de l'utilisateur avec l'id : ", id);
     result(null, res);
   });
 };
 
 Utilisateur.recuperer_utilisateur= (id, result) => {
-  sql.query(`Select * From utilisateurs Where id= '${id}' `, (err, res) => {
+  sql.query("Select * From utilisateurs Where id= ?",id, (err, res) => {
     
     if (err) {
       console.log("error: ", err);
@@ -86,7 +90,7 @@ Utilisateur.recuperer_utilisateur= (id, result) => {
 
 
 Utilisateur.recuperer_administrateur = (id, result) => {
-  sql.query(`SELECT administrateur FROM utilisateurs WHERE id = ${id}`, (err, res) => {
+  sql.query("SELECT administrateur FROM utilisateurs WHERE id = ?", id,(err, res) => {
       if (err) {
         console.log("L'utilisateur n'a pas été trouvé: ", err);
         result(err, null);

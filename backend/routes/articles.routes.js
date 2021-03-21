@@ -2,16 +2,17 @@ const express = require('express');
 const router = express.Router();
 
 const auth = require('../middlewares/auth');
+const administrateur = require('../middlewares/administrateur');
 
 const articles = require("../controllers/articles.controllers.js");
 
-router.post("/creation_article/:utilisateurId", articles.creer_article);
+router.post("/creation_article/:utilisateurId", auth,articles.creer_article);
 
-router.get("/afficher_articles",articles.afficher_articles);
-router.get("/afficher_reponses/:articleId", articles.afficher_reponses);
-router.get("/messages_profil/:utilisateurId", articles.messages_profil );
-router.get("/afficher_administrateur", articles.afficher_administrateur);
+router.get("/afficher_articles" ,auth,articles.afficher_articles);
+router.get("/afficher_reponses/:articleId", auth, articles.afficher_reponses);
+router.get("/messages_profil/:utilisateurId",auth, articles.messages_profil );
+router.get("/afficher_administrateur", administrateur,articles.afficher_administrateur);
 
-router.delete("/supprimer_article/:articleId", articles.supprimer_article);
+router.delete("/supprimer_article/:articleId", administrateur , articles.supprimer_article);
 
 module.exports = router;

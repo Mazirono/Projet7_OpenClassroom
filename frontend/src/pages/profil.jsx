@@ -1,6 +1,6 @@
 import React  from 'react';
 import Affichage_profil from '../components/profil/affichage_profil';
-
+import withAuth from "../components/authentification/withAuth.jsx"; 
 export class Profil extends React.Component{
  
   constructor(props) {
@@ -20,7 +20,7 @@ export class Profil extends React.Component{
     
     return (
      
-      <section>
+      <section id="section_profil"> 
           
           <Affichage_profil  id_utilisateur= {this.state.id_utilisateur}/>
 
@@ -29,4 +29,4 @@ export class Profil extends React.Component{
   }
 }
 
-export default Profil 
+export default withAuth(Profil) 

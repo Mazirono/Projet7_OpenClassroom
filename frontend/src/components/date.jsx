@@ -4,7 +4,7 @@ import React from "react";
 function Date(props) {
     var date =  props.date
     
-   console.log(props)
+   
     var année = date.slice(0, 4)
     var mois = date.slice(5,7)
     var jour = date.slice(8, 10)

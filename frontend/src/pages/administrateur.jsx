@@ -1,6 +1,6 @@
 import React  from 'react';
 import Affichage_administrateur from '../components/administrateur/affichage_administrateur';
-
+import withAdmin from "../components/authentification/withAdmin.jsx"; 
 export class Administrateur extends React.Component{
  
   constructor(props) {
@@ -15,7 +15,7 @@ export class Administrateur extends React.Component{
     
     return (
      
-      <section>
+      <section id="section_administrateur">
           
           <Affichage_administrateur />
 
@@ -24,4 +24,4 @@ export class Administrateur extends React.Component{
   }
 }
 
-export default Administrateur
+export default withAdmin(Administrateur)

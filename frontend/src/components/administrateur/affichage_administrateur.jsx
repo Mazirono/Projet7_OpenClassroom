@@ -30,8 +30,16 @@ class Affichage_administrateur extends React.Component {
   
   
     componentDidMount() {
-      fetch("http://localhost:3001/api/articles/afficher_administrateur")
-        .then(res => res.json())
+      var administateur = localStorage.getItem("administrateur");
+      fetch("http://localhost:3001/api/articles/afficher_administrateur" , {
+        method: 'GET',
+        
+        headers: {
+            'Authorization':administateur , 
+              'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(res => res.json())
+
         .then(
           (result) => {
             

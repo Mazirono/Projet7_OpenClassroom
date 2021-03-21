@@ -17,9 +17,15 @@ class Nombre_commentaire extends React.Component {
     }
   
     componentDidMount() {
+      const token = localStorage.getItem("token")
+      fetch("http://localhost:3001/api/articles/afficher_reponses/" + this.state.id_article, {
+        method: 'GET',
         
-    fetch("http://localhost:3001/api/articles/afficher_reponses/" + this.state.id_article) 
-      .then(res => res.json())
+        headers: {
+            'Authorization': token, 
+              'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(res => res.json())
       .then(
         (result) => {
            
@@ -51,10 +57,10 @@ class Nombre_commentaire extends React.Component {
           return (
             <div>
                 {items.length &&
-                 <button type="button" class="btn btn-primary">{items.length} commentaires</button>
+                 <button type="button" className="btn btn-primary">{items.length} commentaires</button>
                 } 
                 {items.message == false &&
-                 <button type="button" class="btn btn-primary">0 commentaire</button>
+                 <button type="button" className="btn btn-primary">0 commentaire</button>
                 } 
                 
           </div>

@@ -2,7 +2,7 @@ import React from "react";
 import loginImg from "../images/login.png";
 import { Redirect} from "react-router-dom";
 import Verification_administrateur from "../components/administrateur/verification_administrateur";
-
+import withAuth from "../components/authentification/withAuth.jsx"; 
 export class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +32,7 @@ export class Login extends React.Component {
       method: "POST",
       body: envoyer_formulaire,
         
-      headers: {
+       headers: {
       'Content-Type': 'application/json'
       },
         
@@ -45,7 +45,7 @@ export class Login extends React.Component {
               localStorage.setItem("token", res.token);
               localStorage.setItem("user_id", res.userId);
               Verification_administrateur(res.userId)
-              window.location.reload();
+              window.location.reload(false);
             
               
             })
@@ -65,7 +65,7 @@ export class Login extends React.Component {
     return (
       <section className="base-container" ref={this.props.containerRef}>
         
-        <div className="header">Connexion</div>
+        
         <div className="content">
           <div className="image">
             <img src={loginImg} />
@@ -98,5 +98,5 @@ export class Login extends React.Component {
   }
 }
 
-export default (Login) ;
+export default withAuth(Login) ;
 

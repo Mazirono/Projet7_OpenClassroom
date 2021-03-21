@@ -7,13 +7,10 @@ const app = express();
 const ArticlesRoutes = require('./routes/articles.routes');
 const UtilisateursRoutes = require('./routes/utilisateurs.routes');
 
-// parse requests of content-type: application/json
 app.use(bodyParser.json());
 
-// parse requests of content-type: application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// simple route
 app.get("/", (req, res) => {
   res.json({ message: "Le serveur est sur le port 3001." });
 });

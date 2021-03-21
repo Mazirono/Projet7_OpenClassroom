@@ -27,8 +27,16 @@ class Affichage_reponses extends React.Component {
 
   
     componentDidMount() {
-        fetch("http://localhost:3001/api/articles/afficher_reponses/" + this.state.id_article)
-        .then(res => res.json())
+      const token = localStorage.getItem("token")
+      fetch("http://localhost:3001/api/articles/afficher_reponses/" + this.state.id_article, {
+        method: 'GET',
+        
+        headers: {
+            'Authorization': token, 
+              'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(res => res.json())
+        
         .then(
             (result) => {
              
