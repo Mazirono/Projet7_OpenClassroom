@@ -44,7 +44,7 @@ export class Login extends React.Component {
               
               localStorage.setItem("token", res.token);
               localStorage.setItem("user_id", res.userId);
-              Verification_administrateur(res.userId)
+              Verification_administrateur(res.administrateur)
               window.location.reload(false);
             
               

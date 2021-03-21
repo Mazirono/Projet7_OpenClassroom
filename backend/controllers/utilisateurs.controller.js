@@ -39,7 +39,7 @@ router.inscription = (req, res, next) => {
               res.status(200).json({
                 userId : data.id,
                 token: jwt.sign(
-                  { userId: data.id },
+                  { userId: data.id, administrateur :data.administrateur },
                   'RANDOM_TOKEN_SECRET',
                   { expiresIn: '24h' }
                 )
@@ -80,8 +80,9 @@ router.connexion = (req, res, next) => {
           }
           res.status(200).json({
             userId : data.id,
+            administrateur :data.administrateur,
             token: jwt.sign(
-              { userId: data.id },
+              { userId: data.id , administrateur :data.administrateur },
               'RANDOM_TOKEN_SECRET',
               { expiresIn: '24h' }
             )

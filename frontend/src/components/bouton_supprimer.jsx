@@ -13,9 +13,14 @@ class Bouton_supprimer extends React.Component {
     }
 
     handleClick = () => {
-        
+        var administateur = localStorage.getItem("administrateur");
+        const token = localStorage.getItem("token")
         fetch('http://localhost:3001/api/articles/supprimer_article/' + this.state.id_article, {
         method: 'DELETE',
+        headers: {
+            'Authorization':token,administateur , 
+              'Content-Type': 'application/x-www-form-urlencoded'
+        }
         })
 
         .then(res => res.text()) // or res.json()

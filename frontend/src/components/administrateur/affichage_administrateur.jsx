@@ -2,7 +2,7 @@ import React from "react";
 
 import Date from "../date.jsx";
 import Utilisateur from "../utilisateur.jsx";
-import Nombre_commentaire from "../nombre_commentaire.jsx";
+
 import Bouton_supprimer from "../bouton_supprimer.jsx";
 
 
@@ -31,11 +31,12 @@ class Affichage_administrateur extends React.Component {
   
     componentDidMount() {
       var administateur = localStorage.getItem("administrateur");
+      const token = localStorage.getItem("token")
       fetch("http://localhost:3001/api/articles/afficher_administrateur" , {
         method: 'GET',
         
         headers: {
-            'Authorization':administateur , 
+            'Authorization':token,administateur , 
               'Content-Type': 'application/x-www-form-urlencoded'
         }
       }).then(res => res.json())
