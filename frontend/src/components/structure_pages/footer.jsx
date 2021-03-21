@@ -22,7 +22,7 @@ export class Footer extends React.Component {
                     <div class="col-sm-6 col-md-3 item">
                         <h3>Services</h3>
                         <ul>
-                            <li><a href="#">Charte de confidencialité</a></li>
+                            <li><a href="#">Charte de confidentialité</a></li>
                             <li><a href="#">Nous contactez</a></li>
                            
                         </ul>
