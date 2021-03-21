@@ -1,11 +1,7 @@
 module.exports = (req, res, next) => {
   
     try {
-      
-      const administrateur = req.headers.authorization;
-     
-      
-      if (administrateur != true) {
+     if (req.headers.administrateur === "true") {
         next();
       } 
     } catch {
